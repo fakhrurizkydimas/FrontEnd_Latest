@@ -6,18 +6,21 @@ import { useEffect, useState } from 'react';
 import axios from 'axios'
 // import { Link,useNavigate  } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { ItMenu, NewsMenu } from '../../molecules';
+import { ItMenu, NewsMenu, LoginMenu } from '../../molecules';
 import './Navbar.scss';
 
 const Navbar = () => {
   const [openIt, setOpenIt] = useState(false)
   const [openNews, setOpenNews] = useState(false)
+  const [openLoginMenu, setOpenLoginMenu] = useState(false)
   const [auth, setAuth] = useState(false);
   const [inputType, setInputType] = useState('password');
   const [loginStatus, setLoginStatus] = useState(false)
   const [usernameData, setUsernameData] = useState(null)
+  const [loginError, setLoginError] = useState(false)
   // const [isLoggedIn, setIsLoggedIn] = useState(false)
   // const navigate = useNavigate()
+
   const classMenusIt = cx({
     "menu isParent": true,
     "collapse": !openIt
@@ -26,15 +29,26 @@ const Navbar = () => {
     "menu isParent": true,
     "collapse": !openNews
   })
+  const classMenusLoginMenu = cx({
+    "menu isParent": true,
+    "collapse": !openLoginMenu
+  })
 
   const toggleMenu = (type) => {
     if (type === 'it') {
       setOpenIt(!openIt)
       setOpenNews(false)
+      setOpenLoginMenu(false)
     }
     if (type === 'news') {
       setOpenIt(false)
+      setOpenLoginMenu(false)
       setOpenNews(!openNews)
+    }
+    if (type === 'LoginMenu') {
+      setOpenLoginMenu(!openLoginMenu)
+      setOpenIt(false)
+      setOpenNews(false)
     }
   }
 
@@ -75,7 +89,7 @@ const Navbar = () => {
     document.cookie = name + "=" + (value || "")  + expires + "; path=/";
   }
 
-  const OnClickLogin = ()=> {
+  const OnClickLogin = async() => {
     let username = document.querySelector('#usernameLogin').value
     let password = document.querySelector('#passwordLogin').value
     let config = {
@@ -86,14 +100,23 @@ const Navbar = () => {
       },
       data: JSON.stringify({'username':username, 'password':password})
     }
-    axios(config).then(response => {
-      console.log(response)
-      setCookie('dataUser',JSON.stringify(response.data),7)
+    //  axios(config).then(response => {
+      // console.log(response)
+      // setCookie('dataUser',JSON.stringify(response.data),7)
+      // setAuth(!auth)
+      // window.location.href='/'
+    // }).catch(err =>{
+    //   console.log(err)
+    // })
+    const result = await axios(config).then(response => response).catch(error => null)
+    if( result !== null ) {
+      setLoginError(false)
+      setCookie('dataUser',JSON.stringify(result.data),7)
       setAuth(!auth)
-      window.location.href='/'
-    }).catch(err =>{
-      console.log(err)
-    })
+      window.location.href='/news/update'       
+    } else {
+      setLoginError(true)
+    }
   }
 
   useEffect(() => {
@@ -112,7 +135,7 @@ const Navbar = () => {
       <div className="_navbar">
         <div className="left">
           <Link to="/home">
-            <img className="logo" src="./logo.png" alt="" />
+            <img className="logo" src="../../logo.png" alt="" />
           </Link>
         </div>
         <div className="center">
@@ -145,27 +168,70 @@ const Navbar = () => {
             </div>
           </div>
           <div className="menus">
-            <Link to="/" className="menu">
+            <Link to="/infographic" className="menu">
               Infographic
             </Link>
           </div>
+
+          {/* <div className="menus">
+            <div className={classMenusLoginMenu}>
+              <span className="parent-link" onClick={() => toggleMenu('LoginMenu')}>
+                <img src="./Profpict.png" alt="" className="img-auth" />
+                {
+                  openLoginMenu ? <ExpandLess /> : <ExpandMoreIcon />
+                }
+              </span>
+              <LoginMenu />
+            </div>
+          </div> */}
+          
+          <div className="menus">
+
+            
+            <div className={classMenusLoginMenu}>
+              <div style={ loginStatus ? { display: 'block', marginLeft: '10px', fontSize: '18px' } : { display: 'none' }}>
+              </div>
+              <button 
+                className="auth"
+                onClick={() => setAuth(!auth)}
+                style={ loginStatus ? { display: 'none' } : { display: 'block' }}
+              >
+                Sign In
+              </button>
+              <span
+                style={ loginStatus ? { display: 'block', marginLeft: '10px', fontSize: '18px' } : { display: 'none' }}
+                className="parent-link" onClick={() => toggleMenu('LoginMenu')}>
+                <img src="../../Profpict.png" alt="" className="img-auth" />
+                
+                {
+                  openLoginMenu ? <ExpandLess /> : <ExpandMoreIcon />
+                }
+              </span>
+              <LoginMenu />
+            </div>
+          </div>
+
           {/* <div className="menus">
             <button className="auth" onClick={() => setAuth(!auth)}>
               Login
             </button>
           </div> */}
-          <div className="menus">
-            <div style={ loginStatus ? { display: 'block', marginLeft: '10px', fontSize: '18px' } : { display: 'none' }}>
+          
+          {/* <div className="menus">
+            <div className="title">
+              <div className="text-welcome"></div>
+              <img src="./Profpict.png" alt="" className="img-auth" />
+              <div style={ loginStatus ? { display: 'block', marginLeft: '10px', fontSize: '18px' } : { display: 'none' }}>
               { usernameData }
-            </div>
-            <button 
-              className="auth"
-              onClick={() => setAuth(!auth)}
-              style={ loginStatus ? { display: 'none' } : { display: 'block' }}
-            >
-              Sign In
-            </button>
-          </div>
+              </div>
+              <button 
+                className="auth"
+                onClick={() => setAuth(!auth)}
+                style={ loginStatus ? { display: 'none' } : { display: 'block' }}
+              >
+                Sign In
+              </button>
+            </div> */}
         </div>
       </div>
       {
@@ -176,7 +242,7 @@ const Navbar = () => {
             </span>
             <div className="title">
               <div className="text-welcome">Welcome to</div>
-              <img src="./logo.png" alt="" className="img-auth" />
+              <img src="/logo.png" alt="" className="img-auth" />
             </div>
             <div className="form">
               <div className="form-group">
@@ -194,6 +260,9 @@ const Navbar = () => {
                       inputType === 'password' ? <VisibilityOff /> : <Visibility />
                     }
                   </span>
+                </div>  
+                <div className="input-error" style={ loginError === true ? { display: 'block', fontSize:'12px', color:'red', marginLeft: '5px' } : { display: 'none' }}>
+                    <span>Login Error. Wrong NIP and/or Password</span>
                 </div>
               </div>
               <button onClick={OnClickLogin} className="btnSign">Sign in</button>

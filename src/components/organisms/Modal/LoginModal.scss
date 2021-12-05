@@ -15,7 +15,7 @@
     background-color: #fff;
     border-radius: 20px;
     padding: 10px;
-    background-image: url("../../../assets/login-bg-2.png");
+    background-image: url("../../../assets/Background Login New.png");
     background-size: cover;
     border: 2px solid var(--inactive-color);
     position: relative;
@@ -60,6 +60,7 @@
           height: 38px;
           padding: 0 10px;
           border-radius: 7px;
+          border-color: #fc0;
           input {
             flex: 1;
             border: none;

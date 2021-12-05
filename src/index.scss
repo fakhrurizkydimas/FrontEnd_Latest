@@ -25,13 +25,32 @@ html {
   min-height: 100vh;
 }
 
+////CSS Vertical Line pada Navbar
 .line {
-  background-color: var(--main-gray);
+  // background-color: var(--main-gray);
+  background-color: whitesmoke;
   &.vertical {
     width: 2px;
   }
 }
 
+////CSS FORM (IT Guidelines & Form)
+.wrapper-page{
+  background-color: #FFF;
+  box-shadow: 12px 12px 35px 0 rgba(0, 0, 0, 0.07);
+  padding: 20px;
+  border-radius: 10px;
+  .title{
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--inactive-color);
+  }
+  @media (max-width:768px) {
+    margin: 20px 0;
+  }
+}
+
+////CSS Arrow pada Hero (Landing Page)
 .slick-arrow{
   &::before{
     font-size: 32px;

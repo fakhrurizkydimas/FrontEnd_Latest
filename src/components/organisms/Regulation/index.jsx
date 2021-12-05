@@ -4,6 +4,16 @@ import { useState } from 'react'
 import { PictureAsPdf } from '@material-ui/icons';
 const Regulation = () => {
   const [value, onChange] = useState(new Date());
+  const [searchOK, setsearchOK] = useState(false)
+
+  const OnClickSearch = () => {
+    if ( searchOK === '' ) {
+      setsearchOK(true)
+    } else {
+      setsearchOK('Error')
+    }
+  }
+
   return (
     <div className="form-wrapper">
       <div className="image-wrapper">
@@ -21,8 +31,8 @@ const Regulation = () => {
               <option value="1">Undang-undang</option>
               <option value="2">Peraturan OJK</option>
               <option value="3">Surat Edaran OJK</option>
-              <option value="3">Peraturan Bank Indonesia</option>
-              <option value="3">Surat Bank Indonesia</option>
+              <option value="4">Peraturan Bank Indonesia</option>
+              <option value="5">Surat Bank Indonesia</option>
             </select>
           </div>
         </div>
@@ -52,13 +62,13 @@ const Regulation = () => {
         <div className="mb-3 row">
           <label className="col-sm-2 col-form-label"></label>
           <div className="col-sm-6 text-end">
-            <button className="btn btn-warning">Search</button>
+            <button onClick={ OnClickSearch } className="btn btn-warning">Search</button>
           </div>
         </div>
       </div>
       <div className="result-search">
         <div className="title">Result</div>
-        <div className="lists">
+        <div className="lists" style={ searchOK ? { display: 'block' } : { display: 'none' }}>
           <div className="item-result d-flex">
             <div className="icons-file me-3">
               <PictureAsPdf />

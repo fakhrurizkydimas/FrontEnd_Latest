@@ -21,7 +21,7 @@ const BOD = () => {
         <div className="border"></div>
 
         <div md="6" className="image-wrapper col-sm-4">
-          <img src="/images/internal-news/Board of Director/Ji Kyuu Jang.png" className="image" alt="" />
+          <img src="/images/internal-news/Board of Director/Ji Kyu Jang.png" className="image" alt="" />
         </div>
         <div md="6" className="header mt-4 col-sm-8">
           <h2 className="name">Ji Kyuu Jang**</h2>

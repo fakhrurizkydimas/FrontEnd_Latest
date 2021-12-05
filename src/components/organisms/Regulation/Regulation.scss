@@ -1,5 +1,9 @@
 .form-wrapper{
   .image-wrapper{
+    img{
+      width: 100%;
+    }
+    position: relative;
     margin-bottom: 40px;
   }
   .form-search, .result-search{

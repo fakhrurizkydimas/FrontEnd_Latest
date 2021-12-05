@@ -1,0 +1,21 @@
+.view{
+    .visionmission-view{
+      padding: 30px;
+      border-radius: 10px;
+      background-color: #FFF;
+      margin-bottom: 40px;
+      .header{
+          margin-top: 30px;
+          margin-bottom: 30px;
+          font-size: 30px;
+          font-weight: bold;
+          color: var(--inactive-color);
+      }
+      .text{
+        margin-bottom: 50px;
+        font-size: 20px;
+        font-weight: bold;
+        color: var(--inactive-color);
+      }
+    }
+}

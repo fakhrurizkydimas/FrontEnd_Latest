@@ -3,10 +3,10 @@ const BOC = () => {
   return (
     <div className="news">
       <div className="news-update row">
-        <div md="6" className="image-wrapper col-sm-6">
+        <div md="6" className="image-wrapper col-sm-4">
           <img src="/images/internal-news/Board of Commisioner/Bo Youl Oh.png" className="image" alt="" />
         </div>
-        <div md="6" className="header mt-5 col-sm-6">
+        <div md="6" className="header mt-5 col-sm-8">
           <h2 className="name">Bo Youl Oh</h2>
           <span className="title-jabatan">Komisaris Utama Independent</span>
           <p></p>
@@ -19,10 +19,10 @@ const BOC = () => {
         </div>
         <div className="border"></div>
 
-        <div md="6" className="image-wrapper col-sm-6">
+        <div md="6" className="image-wrapper col-sm-4">
           <img src="/images/internal-news/Board of Commisioner/Sapto Amal Damandari.png" className="image" alt="" />
         </div>
-        <div md="6" className="header mt-5 col-sm-6">
+        <div md="6" className="header mt-5 col-sm-8">
           <h2 className="name">Sapto Amal Damandari</h2>
           <span className="title-jabatan">Wakil Komisaris Utama Independent</span>
           <p></p>
@@ -35,10 +35,10 @@ const BOC = () => {
         </div>
         <div className="border"></div>
 
-        <div md="6" className="image-wrapper col-sm-6">
+        <div md="6" className="image-wrapper col-sm-4">
           <img src="/images/internal-news/Board of Commisioner/Nam Hoon Cho.png" className="image" alt="" />
         </div>
-        <div md="6" className="header mt-5 col-sm-6">
+        <div md="6" className="header mt-5 col-sm-8">
           <h2 className="name">Nam Hoon Cho**</h2>
           <span className="title-jabatan">Komisaris</span>
           <p></p>
@@ -51,10 +51,10 @@ const BOC = () => {
         </div>
         <div className="border"></div>
 
-        <div md="6" className="image-wrapper col-sm-6">
+        <div md="6" className="image-wrapper col-sm-4">
           <img src="/images/internal-news/Board of Commisioner/Nanang Supriyanto.png" className="image" alt="" />
         </div>
-        <div md="6" className="header mt-5 col-sm-6">
+        <div md="6" className="header mt-5 col-sm-8">
           <h2 className="name">Nanang Supriyanto*</h2>
           <span className="title-jabatan">Komisaris</span>
           <p></p>
@@ -67,10 +67,10 @@ const BOC = () => {
         </div>
         <div className="border"></div>
 
-        <div md="6" className="image-wrapper col-sm-6">
+        <div md="6" className="image-wrapper col-sm-4">
           <img src="/images/internal-news/Board of Commisioner/Susiwijono.png" className="image" alt="" />
         </div>
-        <div md="6" className="header mt-5 col-sm-6">
+        <div md="6" className="header mt-5 col-sm-8">
           <h2 className="name">Susiwijono***</h2>
           <span className="title-jabatan">Komisaris</span>
           <p></p>
@@ -85,10 +85,10 @@ const BOC = () => {
         </div>
         <div className="border"></div>
 
-        <div md="6" className="image-wrapper col-sm-6">
+        <div md="6" className="image-wrapper col-sm-4">
           <img src="/images/internal-news/Board of Commisioner/Stephen Liestyo.png" className="image" alt="" />
         </div>
-        <div md="6" className="header mt-5 col-sm-6">
+        <div md="6" className="header mt-5 col-sm-8">
           <h2 className="name">Stephen Liestyo</h2>
           <span className="title-jabatan">Komisaris</span>
           <p></p>
@@ -101,10 +101,10 @@ const BOC = () => {
         </div>
         <div className="border"></div>
 
-        <div md="6" className="image-wrapper col-sm-6">
+        <div md="6" className="image-wrapper col-sm-4">
           <img src="/images/internal-news/Board of Commisioner/Hae Wang Lee.png" className="image" alt="" />
         </div>
-        <div md="6" className="header mt-5 col-sm-6">
+        <div md="6" className="header mt-5 col-sm-8">
           <h2 className="name">Hae Wang Lee**</h2>
           <span className="title-jabatan">Komisaris Independen</span>
           <p></p>
@@ -117,10 +117,10 @@ const BOC = () => {
         </div>
         <div className="border"></div>
 
-        <div md="6" className="image-wrapper col-sm-6">
+        <div md="6" className="image-wrapper col-sm-4">
           <img src="/images/internal-news/Board of Commisioner/Tippy Joesoef.png" className="image" alt="" />
         </div>
-        <div md="6" className="header mt-5 col-sm-6">
+        <div md="6" className="header mt-5 col-sm-8">
           <h2 className="name">Tippy Joesoef</h2>
           <span className="title-jabatan">Komisaris Independen</span>
           <p></p>

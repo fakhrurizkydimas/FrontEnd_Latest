@@ -1,16 +1,23 @@
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from '../../components';
+import { PortalFooter } from '../../components';
 import './Portal.scss';
 
 const Portal = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-lg-12"
+        <div className="mb-3 col-lg-12"
         style={{ 
                 paddingLeft : '100px',
               }}>
-         <h2> news/dll/dd</h2>
+         <h2> 
+            <a href="http://localhost:3000/news">News</a>
+            >
+            <a href="http://localhost:3000/news/update">External News</a>
+            >
+            <a href="http://localhost:3000/news/financialupdate">Financial</a>
+         </h2>
         </div>
       </div>
       <div className="row">
@@ -33,6 +40,7 @@ const Portal = () => {
           
         </div>
         </div>
+        
         <div className="col-lg-8"
         style={{ 
                 paddingLeft : '50px',
@@ -41,6 +49,9 @@ const Portal = () => {
             <Outlet />
         </div>
         </div>
+      </div>
+      <div className="portalfooter">
+          <PortalFooter />
       </div>
     </div>
   )

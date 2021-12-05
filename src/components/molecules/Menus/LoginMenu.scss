@@ -1,0 +1,32 @@
+.child-menu {
+    width:550px;
+    .item {
+        margin-bottom: 20px;
+        .title-view {
+            width: 250px;
+            margin-left: 30px;
+        }
+        .info {
+            width: 400px;
+            .prof-view {               
+                img{
+                    margin-left:40px;
+                }
+            }
+            .login-info {
+                margin-bottom: 0px;
+                font-size: 100px;
+            }
+        }
+        .btn-signout {
+           margin-left: 350px;
+            width: 100px;
+            height: 48px;
+            background-color: var(--inactive-color);
+            border-radius: 10px;
+            border: none;
+            color: var(--main-yellow);
+            font-weight: 600;
+        }
+    }
+}
