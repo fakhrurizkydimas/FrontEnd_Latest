@@ -20,7 +20,7 @@ const readCookie = (name) => {
 const NewsUpdate = () => {
   const [data, setData] = useState(null)
   let config = {
-      url: 'http://localhost:3031/viewnews',
+      url: 'http://localhost:3031/viewnews/search/params?page=1&maxData=6',
       method: 'GET',
       headers: {
           'Content-Type': 'application/json',
@@ -44,14 +44,14 @@ const NewsUpdate = () => {
           <div className="col-lg-9">
             <div className="head-news">
               <div className="image-wrapper">
-                <img src="/images/internal-news/Wokee+.png" alt="" className="head-image" />
+                <img src={ data ? `http://localhost:3031/${data.result[0].images}` : '' } alt={ data ? data.result[0].title : '' } className="head-image" />
               </div>
               <Link to="/news/update/news-detail">
                 <div className="text-wrapper">
                   <h2 className="title">
-                    Wokee+ KB Bukopin Adopsi Sistem Pembayaran Dengan Sistem Scan Barcode
+                    { data ? data.result[0].title : null }
                   </h2>
-                  <span className="published-at">12 Mei 2021</span>
+                  <span className="published-at">{ data ? Date(data.result[0].date).substring(0, 15) : null }</span>
                 </div>
               </Link>
             </div>
@@ -76,15 +76,16 @@ const NewsUpdate = () => {
               {
                 data ? 
                 data.result.map((res, i) => {
-                  console.log(res)
-                  return(
-                    <NewsItem
-                      link={ `/news/update/${ res._id }`}
-                      title={ res.title }
-                      publishedAt={ Date(res.date).substring(0, 15) }
-                      thumbnail={ `http://localhost:3031/${res.images}`}
-                    />
-                  )
+                  if ( i > 0 ) {
+                    return(
+                      <NewsItem
+                        link={ `/news/update/${ res._id }`}
+                        title={ res.title }
+                        publishedAt={ Date(res.date).substring(0, 15) }
+                        thumbnail={ `http://localhost:3031/${res.images}`}
+                      />
+                    )
+                  }
                 }) : null
               }
               {/* <NewsItem
