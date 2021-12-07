@@ -21,9 +21,11 @@ const readCookie = (name) => {
 const NewsDetail = (props) => {
   const params = useParams()
   const [dataDetail, setDataDetail] = useState(null)
+  const [newsUpdate, setNewsUpdate] = useState(null)
+
   let config = {
-    url: 'http://localhost:3031/viewDetail',
-    method: 'POST',
+    url: `http://localhost:3031/news/detail?id=${ params.id }`,
+    method: 'get',
     headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${ JSON.parse(readCookie('dataUser')).result.token }`
@@ -31,11 +33,25 @@ const NewsDetail = (props) => {
     data: JSON.stringify({ "_id": params.id })
   }
 
+  let configNewsUpdate = {
+    url: 'http://localhost:3031/viewnews/search/params?page=1&maxData=3',
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${ JSON.parse(readCookie('dataUser')).result.token }`
+    }, 
+  }
+
   useEffect(async () => {
     let DataDetail = await axios(config).then(response => response.data.result).catch(err => false)
     console.log(DataDetail)
     if ( dataDetail === null ) {
       setDataDetail(DataDetail)
+    }
+
+    let NewsUpdate = await axios(configNewsUpdate).then(response => response.data.result).catch(err => false)
+    if ( newsUpdate === null ) {
+      setNewsUpdate(NewsUpdate)
     }
   })
 
@@ -56,14 +72,11 @@ const NewsDetail = (props) => {
           }
         </span>
         <div className="image-wrapper my-3">
-          <img src="/images/internal-news/Wokee+.png" alt="" />
+          <img src={ dataDetail ? `http://localhost:3031/${ dataDetail.images }` : null } alt="" />
         </div>
         <div className="body" style={{ textAlign: "justify"}}>
           <p>
             { dataDetail ? dataDetail.description : null }
-          </p>
-          <p>
-          Nantinya nasabah dapat melakukan pembayaran secara non tunai di berbagai gerai merchant yang sudah memiliki kerjasama dengan KB Bukopin. 
           </p>
         </div>
       </div>
@@ -71,45 +84,28 @@ const NewsDetail = (props) => {
       <div className="list-news">
         <h3 className="header-list">News Update</h3>
         <div className="row">
-          <div className="col-lg-4 d-flex">
-            <div className="kb-card">
-              <div className="image-wrapper">
-                <img src="/images/internal-news/Customer Gathering.png" className="image img-fluid" alt="" />
-              </div>
-              <div className="body">
-                <span className="title">
-                  KB Bukopin Gelar Serangkaian Customer Gathering Di 6 Kota
-                </span>
-                <span className="time-publised">12 Mei 2021</span>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-4 d-flex" style={{ justifyContent: "center"}}>
-            <div className="kb-card">
-              <div className="image-wrapper">
-                <img src="/images/internal-news/Rebranding.png" className="image img-fluid" alt="" />
-              </div>
-              <div className="body">
-                <span className="title">
-                  Sosialisasi Rebranding KB Bukopin
-                </span>
-                <span className="time-publised">12 Mei 2021</span>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-4 d-flex">
-            <div className="kb-card">
-              <div className="image-wrapper">
-                <img src="/images/internal-news/RUPS.png" className="image img-fluid" alt="" />
-              </div>
-              <div className="body">
-                <span className="title">
-                  Rapat Umum Pemegang Saham Luar Biasa PT Bank KB Bukopin Tbk
-                </span>
-                <span className="time-publised">12 Mei 2021</span>
-              </div>
-            </div>
-          </div>
+          {
+            newsUpdate ? 
+              newsUpdate.map((data,i) => {
+                return(
+                  <div className="col-lg-4 d-flex" key={ i }>
+                    <a href={ `/news/update/${ data._id }` }>
+                      <div className="kb-card">
+                        <div className="image-wrapper">
+                          <img src={ `http://localhost:3031/${ data.images }` } className="image img-fluid" alt={ data.title } />
+                        </div>
+                        <div className="body">
+                          <span className="title">
+                            { data.title }
+                          </span>
+                          <span className="time-publised">{ Date(data.date).substring(0, 15) }</span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                )
+              }) : null
+          }
         </div>
         <div className="more">
           <span className="text">More</span>

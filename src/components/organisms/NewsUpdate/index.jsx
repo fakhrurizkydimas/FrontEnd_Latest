@@ -20,12 +20,12 @@ const readCookie = (name) => {
 const NewsUpdate = () => {
   const [data, setData] = useState(null)
   let config = {
-      url: 'http://localhost:3031/viewnews/search/params?page=1&maxData=6',
-      method: 'GET',
-      headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${ JSON.parse(readCookie('dataUser')).result.token }`
-      }, 
+    url: 'http://localhost:3031/viewnews/search/params?page=1&maxData=6',
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${ JSON.parse(readCookie('dataUser')).result.token }`
+    }, 
   }
 
   useEffect( async () => {
@@ -46,7 +46,7 @@ const NewsUpdate = () => {
               <div className="image-wrapper">
                 <img src={ data ? `http://localhost:3031/${data.result[0].images}` : '' } alt={ data ? data.result[0].title : '' } className="head-image" />
               </div>
-              <Link to="/news/update/news-detail">
+              <Link to={ `/news/update/${ data ? data.result[0]._id : '' }` }>
                 <div className="text-wrapper">
                   <h2 className="title">
                     { data ? data.result[0].title : null }
@@ -79,6 +79,7 @@ const NewsUpdate = () => {
                   if ( i > 0 ) {
                     return(
                       <NewsItem
+                        key={ i }
                         link={ `/news/update/${ res._id }`}
                         title={ res.title }
                         publishedAt={ Date(res.date).substring(0, 15) }
