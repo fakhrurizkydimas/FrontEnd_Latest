@@ -78,6 +78,7 @@ const NewsUpdate = () => {
                 data.result.map((res, i) => {
                   if ( i > 0 ) {
                     return(
+                      <>
                       <NewsItem
                         key={ i }
                         link={ `/news/update/${ res._id }`}
@@ -85,6 +86,8 @@ const NewsUpdate = () => {
                         publishedAt={ Date(res.date).substring(0, 15) }
                         thumbnail={ `http://localhost:3031/${res.images}`}
                       />
+                      <Line width="100%" height="2px" bg="#DDD" m="20px 0"  />
+                      </>
                     )
                   }
                 }) : null
