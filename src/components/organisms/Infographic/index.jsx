@@ -39,33 +39,31 @@ const Infographic = () => {
     
     if ( e._reactName === 'onClick' ) {
       setResCount(false)
-      if ( e.key === 'Enter' ) {
-        let NewFormData = new FormData()
-        NewFormData.append('username', document.querySelector('#data-username').value)
-        // NewFormData.append('division', document.querySelector('#data-division').value)
-        NewFormData.append('from', fromDate)
-        NewFormData.append('end', endDate)
-        let config = {
-          url: 'http://localhost:3031/infographics/detect/params',
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${ JSON.parse(readCookie('dataUser')).result.token }`
-          },
-          data: NewFormData
-        }
-        
-        await axios(config).then(response => {
-          console.log(response.data.result)
-          setResCount(true)
-          setDataChart({
-            labels: response.data.result.resDateArray, // range of bar
-            series: [ response.data.result.resDateData ] // value of bar
-          })
-        }).catch(err => {
-          console.log(err)
-        })
+      let NewFormData = new FormData()
+      NewFormData.append('username', document.querySelector('#data-username').value)
+      // NewFormData.append('division', document.querySelector('#data-division').value)
+      NewFormData.append('from', fromDate)
+      NewFormData.append('end', endDate)
+      let config = {
+        url: 'http://localhost:3031/infographics/detect/params',
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${ JSON.parse(readCookie('dataUser')).result.token }`
+        },
+        data: NewFormData
       }
+      
+      await axios(config).then(response => {
+        console.log(response.data.result)
+        setResCount(true)
+        setDataChart({
+          labels: response.data.result.resDateArray, // range of bar
+          series: [ response.data.result.resDateData ] // value of bar
+        })
+      }).catch(err => {
+        console.log(err)
+      })
     } else if ( e._reactName === 'onKeyDown' ) {
       setResCount(false)
       if ( e.key === 'Enter' ) {
